@@ -23,58 +23,116 @@ namespace Bűnbarlang
 
         public void Start()
         {
-            Console.Clear();
-            Console.WriteLine("Black Jack\n");
-            bool jatekosFolytat = true;
-            while (jatekosFolytat && JatekosPont < 21)
-            {
-                KartyaErtek lap = LapHuzas(true);
-                Console.WriteLine($"Húzott lap: {lap}, pontok: {jatekosPont}");
-                if (jatekosPont >= 21)
-                {
-                    jatekosFolytat = false;
-
-                }
-                else
-                {
-                    Console.WriteLine("Kérsz még lapot? (i/n): ");
-                    bool helyesErtek = false;
-                    while (!helyesErtek)
-                    {
-                        string valasz = Console.ReadLine();
-                        if (valasz.ToLower() == "i")
-                        {
-                            jatekosFolytat = true;
-                            helyesErtek = true;
-                        }
-                        else if (valasz.ToLower() == "n")
-                        {
-                            jatekosFolytat = false;
-                            helyesErtek = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Helyes értéket adj meg (i/n): ");
-                        }
-                    }
-
-                }
-            }
-            while (gepPont < 17)
-            {
-                KartyaErtek lap = LapHuzas(false);
-                Console.WriteLine($"Gép Húzott lapja:: {lap} (pontok: {gepPont})");
-            }
-            Eredmeny();
-            Console.WriteLine("Szeretnél újra játszani? (i/n)");
-            string ujra = Console.ReadLine().ToLower();
-            if (ujra == "i")
+            bool ujra = true;
+            while (ujra)
             {
                 jatekosPont = 0;
                 gepPont = 0;
-                Start();
+                Console.Clear();
+                Console.WriteLine("Black Jack\n");
+                List<KartyaErtek> jatekoslapok = new List<KartyaErtek>();
+                List<KartyaErtek> geplapok = new List<KartyaErtek>();
+                jatekoslapok.Add(LapHuzas(true));
+                jatekoslapok.Add(LapHuzas(true));
+                geplapok.Add(LapHuzas(false));
+                geplapok.Add(LapHuzas(false));
+                KiirJatekosLapok(jatekoslapok);
+                KiirGepLapok(geplapok, true);
+                if (jatekosPont == 21 || GepPont == 21)
+                {
+                    KiirJatekosLapok(jatekoslapok);
+                    KiirGepLapok(geplapok, false);
+                    Eredmeny();
+                }
+                else
+                {
+                    bool jatekosFolytat = true;
+                    while (jatekosFolytat && JatekosPont < 21)
+                    {
+                        Console.WriteLine("Kérsz még lapot? (i/n): ");
+                        bool helyesErtek = false;
+                        while (!helyesErtek)
+                        {
+                            string valasz = Console.ReadLine().ToLower();
+                            if (valasz == "i")
+                            {
+                                KartyaErtek lap = LapHuzas(true);
+                                helyesErtek = true;
+                                jatekoslapok.Add(lap);
+                                KiirJatekosLapok(jatekoslapok);
+                                if (jatekosPont >= 21)
+                                {
+                                    jatekosFolytat = false;
+
+                                }
+                            }
+                            else if (valasz == "n")
+                            {
+                                jatekosFolytat = false;
+                                helyesErtek = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Helyes értéket adj meg (i/n): ");
+                            }
+                        }
+                    }
+                    Console.WriteLine("\nAz osztó felfedi a lapjait:");
+                    KiirGepLapok(geplapok, false);
+                    while (gepPont < 17)
+                    {
+                        KartyaErtek lap = LapHuzas(false);
+                        geplapok.Add(lap);
+                        KiirGepLapok(geplapok, false);
+                    }
+                    Eredmeny();
+                }
+                Console.WriteLine("\nSzeretnél újra játszani? (i/n)");
+                string ujravalasz = Console.ReadLine().ToLower();
+                if (ujravalasz != "i")
+                {
+                    ujra = false;
+                }
             }
         }
+
+        private void KiirJatekosLapok(List<KartyaErtek> lapok)
+        {
+            Console.WriteLine("\n=============================");
+            Console.Write($"Játékos lapjai: ");
+            Console.WriteLine("=============================");
+            foreach (var lap in lapok)
+            {
+                Console.Write($"[{lap}] ");
+            }
+            Console.WriteLine($"(pontok: {jatekosPont})");
+            Console.WriteLine("=============================");
+        }
+
+        private void KiirGepLapok(List<KartyaErtek> lapok, bool elsoLapRejtve = false)
+        {
+            Console.WriteLine("\n=============================");
+            Console.Write($"Gép lapjai: ");
+            Console.WriteLine("=============================");
+            for (int i = 0; i < lapok.Count; i++)
+            {
+                if (i == 0 && elsoLapRejtve)
+                {
+                    Console.Write($"[?] ");
+                }
+                else
+                {
+                    Console.Write($"[{lapok[i]}]");
+                }
+            }
+            if (elsoLapRejtve)
+            {
+                Console.WriteLine("\nPontok: ? + ...");
+            }
+            Console.WriteLine($"(pontok: {gepPont})");
+            Console.WriteLine("\n=============================");
+        }
+
         private int pontErtek(KartyaErtek lap)
         {
             switch (lap)
