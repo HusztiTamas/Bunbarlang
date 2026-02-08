@@ -8,7 +8,6 @@ class Program
     static void Game()
     {
         bool fut = true;
-        ElsoJatek elso = new ElsoJatek();
 
         while (fut)
         {
@@ -23,7 +22,8 @@ class Program
 
             if (valasztas == "1")
             {
-                elso.Start();
+                ElsoJatek jatek=new ElsoJatek();
+                jatek.Start();
             }
             else if (valasztas == "2")
             {
