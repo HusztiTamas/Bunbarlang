@@ -12,31 +12,34 @@ class Program
         while (fut)
         {
             Console.Clear();
-            Console.WriteLine("Bűnbarlang\n");
-            Console.WriteLine("1. Első játék");
+            Console.WriteLine("=============================");
+            Console.WriteLine("Üdv a Bűnbarlangban!");
+            Console.WriteLine("=============================\n");
+            Console.WriteLine("1. Első játék (Blacjjack)");
             Console.WriteLine("2. Második játék");
-            Console.WriteLine("0. Kilépés");
-            Console.WriteLine("Választás: ");
+            Console.WriteLine("3. Kilépés");
+            Console.WriteLine("\nVálasztás: ");
 
             string valasztas = Console.ReadLine();
-
-            if (valasztas == "1")
+            switch (valasztas)
             {
-                ElsoJatek jatek=new ElsoJatek();
-                jatek.Start();
-            }
-            else if (valasztas == "2")
-            {
-                Console.WriteLine("2es jatek");
-            }
-            else if (valasztas == "0")
-            {
-                fut = false;
-            }
-            else
-            {
-                Console.WriteLine("Nem létezik ilyen választás!");
-                Console.ReadKey();
+                case "1":
+                    ElsoJatek jatek = new ElsoJatek();
+                    jatek.Start();
+                    break;
+                case "2":
+                    Console.WriteLine("2es jatek");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    fut = false;
+                    Console.WriteLine("Reméljük élvezte!");
+                    break;
+                default:
+                    Console.WriteLine("Nem létezik ilyen választás!");
+                    Console.WriteLine("Nyomj egy gombot a visszalépéshez!");
+                    Console.ReadKey();
+                    break;
             }
         }
     }
