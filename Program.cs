@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bűnbarlang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 
@@ -7,6 +8,8 @@ class Program
     static void Game()
     {
         bool fut = true;
+        ElsoJatek elso = new ElsoJatek();
+
         while (fut)
         {
             Console.Clear();
@@ -15,10 +18,12 @@ class Program
             Console.WriteLine("2. Második játék");
             Console.WriteLine("0. Kilépés");
             Console.WriteLine("Választás: ");
+
             string valasztas = Console.ReadLine();
+
             if (valasztas == "1")
             {
-                Console.WriteLine("1es jatek");
+                elso.Start();
             }
             else if (valasztas == "2")
             {
