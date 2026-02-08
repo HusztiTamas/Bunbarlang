@@ -29,7 +29,7 @@ namespace Bűnbarlang
                 jatekosPont = 0;
                 gepPont = 0;
                 Console.Clear();
-                Console.WriteLine("Black Jack\n");
+                Console.WriteLine("Blackjack");
                 List<KartyaErtek> jatekoslapok = new List<KartyaErtek>();
                 List<KartyaErtek> geplapok = new List<KartyaErtek>();
                 jatekoslapok.Add(LapHuzas(true));
@@ -96,25 +96,33 @@ namespace Bűnbarlang
             }
         }
 
-        private void KiirJatekosLapok(List<KartyaErtek> lapok)
+        private void KiirJatekosLapok(List<KartyaErtek> jatekoslapok)
         {
             Console.WriteLine("\n=============================");
-            Console.Write($"Játékos lapjai: ");
+            Console.WriteLine($"JÁTÉKOS LAPJAI: ");
             Console.WriteLine("=============================");
-            foreach (var lap in lapok)
+            foreach (var lap in jatekoslapok)
             {
                 Console.Write($"[{lap}] ");
             }
             Console.WriteLine($"(pontok: {jatekosPont})");
+            if (jatekosPont == 21)
+            {
+                Console.WriteLine("Blackjack!");
+            }
+            else if (jatekosPont > 21)
+            {
+                Console.WriteLine("Túllépted a 21-et!");
+            }
             Console.WriteLine("=============================");
         }
 
-        private void KiirGepLapok(List<KartyaErtek> lapok, bool elsoLapRejtve = false)
+        private void KiirGepLapok(List<KartyaErtek> geplapok, bool elsoLapRejtve = false)
         {
             Console.WriteLine("\n=============================");
-            Console.Write($"Gép lapjai: ");
+            Console.WriteLine($"GÉP LAPJAI: ");
             Console.WriteLine("=============================");
-            for (int i = 0; i < lapok.Count; i++)
+            for (int i = 0; i < geplapok.Count; i++)
             {
                 if (i == 0 && elsoLapRejtve)
                 {
@@ -122,15 +130,26 @@ namespace Bűnbarlang
                 }
                 else
                 {
-                    Console.Write($"[{lapok[i]}]");
+                    Console.Write($"[{geplapok[i]}]");
                 }
             }
             if (elsoLapRejtve)
             {
-                Console.WriteLine("\nPontok: ? + ...");
+                Console.WriteLine($"\nPontok: ? + {pontErtek(geplapok[1])}");
             }
-            Console.WriteLine($"(pontok: {gepPont})");
-            Console.WriteLine("\n=============================");
+            else
+            {
+                if (gepPont == 21)
+                {
+                    Console.WriteLine("Blackjack!");
+                }
+                else if (gepPont > 21)
+                {
+                    Console.WriteLine("Túllépte a 21-et!");
+                }
+                Console.WriteLine($"(pontok: {gepPont})");
+            }
+            Console.WriteLine("=============================");
         }
 
         private int pontErtek(KartyaErtek lap)
@@ -189,16 +208,16 @@ namespace Bűnbarlang
 
         private void Eredmeny()
         {
-            Console.WriteLine("--- Végeredmény ---");
+            Console.WriteLine("\n--- Végeredmény ---");
             Console.WriteLine($"Játékos pontja: {jatekosPont}");
             Console.WriteLine($"Gép pontja: {gepPont}");
             if (jatekosPont > 21)
             {
-                Console.WriteLine("Több, mint 21 a lapjaid értéke. Vesztettél!");
+                Console.WriteLine("Vesztettél!");
             }
             else if (gepPont > 21)
             {
-                Console.WriteLine("A gép lapjainak értéke több, mint 21. Nyertél!");
+                Console.WriteLine("Nyertél!");
             }
             else if (jatekosPont > gepPont)
             {
