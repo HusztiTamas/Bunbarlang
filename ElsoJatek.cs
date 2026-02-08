@@ -29,7 +29,6 @@ namespace Bűnbarlang
                 jatekosPont = 0;
                 gepPont = 0;
                 Console.Clear();
-                Console.WriteLine("Blackjack");
                 List<KartyaErtek> jatekoslapok = new List<KartyaErtek>();
                 List<KartyaErtek> geplapok = new List<KartyaErtek>();
                 jatekoslapok.Add(LapHuzas(true));
@@ -59,7 +58,9 @@ namespace Bűnbarlang
                                 KartyaErtek lap = LapHuzas(true);
                                 helyesErtek = true;
                                 jatekoslapok.Add(lap);
+                                Console.Clear();
                                 KiirJatekosLapok(jatekoslapok);
+                                KiirGepLapok(geplapok, false);
                                 if (jatekosPont >= 21)
                                 {
                                     jatekosFolytat = false;
@@ -77,13 +78,16 @@ namespace Bűnbarlang
                             }
                         }
                     }
-                    Console.WriteLine("\nAz osztó felfedi a lapjait:");
-                    KiirGepLapok(geplapok, false);
-                    while (gepPont < 17)
+                    if (jatekosPont <= 21)
                     {
-                        KartyaErtek lap = LapHuzas(false);
-                        geplapok.Add(lap);
+                        Console.WriteLine("\nAz osztó felfedi a lapjait:");
                         KiirGepLapok(geplapok, false);
+                        while (gepPont < 17)
+                        {
+                            KartyaErtek lap = LapHuzas(false);
+                            geplapok.Add(lap);
+                            KiirGepLapok(geplapok, false);
+                        }
                     }
                     Eredmeny();
                 }
@@ -98,6 +102,7 @@ namespace Bűnbarlang
 
         private void KiirJatekosLapok(List<KartyaErtek> jatekoslapok)
         {
+            Console.WriteLine("Blackjack");
             Console.WriteLine("\n=============================");
             Console.WriteLine($"JÁTÉKOS LAPJAI: ");
             Console.WriteLine("=============================");
@@ -172,29 +177,44 @@ namespace Bűnbarlang
             };
             KartyaErtek lap = lapok[rnd.Next(lapok.Length)];
             int pont = pontErtek(lap);
-            if (lap == KartyaErtek.Ász && jatekos)
+            if (lap == KartyaErtek.Ász)
             {
-                bool ervenyesValasz = false;
-                Console.WriteLine("Ászt húztál. 1 vagy 11 pont legyen?");
-                while (!ervenyesValasz)
+                if (jatekos)
                 {
-                    string valasz = Console.ReadLine();
-                    if (valasz == "1")
+                    bool ervenyesValasz = false;
+                    Console.WriteLine("Ászt húztál. 1 vagy 11 pont legyen?");
+                    while (!ervenyesValasz)
+                    {
+                        string valasz = Console.ReadLine();
+                        if (valasz == "1")
+                        {
+                            pont = 1;
+                            ervenyesValasz = true;
+                        }
+                        else if (valasz == "11")
+                        {
+                            pont = 11;
+                            ervenyesValasz = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Érvényes választ adj meg! 1 vagy 11!");
+                        }
+                    }
+                }
+                else
+                {
+                    if (gepPont + 11 > 21)
                     {
                         pont = 1;
-                        ervenyesValasz = true;
-                    }
-                    else if (valasz == "11")
-                    {
-                        pont = 11;
-                        ervenyesValasz = true;
                     }
                     else
                     {
-                        Console.WriteLine("Érvényes választ adj meg! 1 vagy 11!");
+                        pont = 11;
                     }
                 }
             }
+
             if (jatekos)
             {
                 jatekosPont += pont;

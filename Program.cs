@@ -15,7 +15,7 @@ class Program
             Console.WriteLine("=============================");
             Console.WriteLine("Üdv a Bűnbarlangban!");
             Console.WriteLine("=============================\n");
-            Console.WriteLine("1. Első játék (Blacjjack)");
+            Console.WriteLine("1. Első játék (Blackjack)");
             Console.WriteLine("2. Második játék");
             Console.WriteLine("3. Kilépés");
             Console.WriteLine("\nVálasztás: ");
