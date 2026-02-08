@@ -39,6 +39,7 @@ namespace Bűnbarlang
                 KiirGepLapok(geplapok, true);
                 if (jatekosPont == 21 || GepPont == 21)
                 {
+                    Console.Clear();
                     KiirJatekosLapok(jatekoslapok);
                     KiirGepLapok(geplapok, false);
                     Eredmeny();
