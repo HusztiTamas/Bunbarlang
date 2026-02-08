@@ -15,9 +15,9 @@ namespace Bűnbarlang
         Nyolc = 8,
         Kilenc = 9,
         Tíz = 10,
-        Jumbó = 10,
-        Dáma = 10,
-        Király = 10,
-        Ász = 11
+        Ász = 11,
+        Jumbó = 12,
+        Dáma = 13,
+        Király = 14
     }
 }
