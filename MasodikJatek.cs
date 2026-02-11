@@ -59,7 +59,7 @@ namespace Bűnbarlang
                                         Console.Write("\b");
                                     }
                                 }
-                                Console.Write(slot[11] + " ");
+                                Console.Write("|" + slot[11] + "|");
                                 eredmeny.Add(slot[11]);
                                 break;
                             case < 55:
@@ -74,7 +74,7 @@ namespace Bűnbarlang
                                     }
                                 }
                                 random = rnd.Next(6);
-                                Console.Write(slot[random] + " ");
+                                Console.Write("|" + slot[random] + "|");
                                 eredmeny.Add(slot[random]);
                                 break;
                             default:
@@ -89,7 +89,7 @@ namespace Bűnbarlang
                                     }
                                 }
                                 random = rnd.Next(6, 11);
-                                Console.Write(slot[random] + " ");
+                                Console.Write("|" + slot[random] + "|");
                                 eredmeny.Add(slot[random]);
                                 break;
                         }
