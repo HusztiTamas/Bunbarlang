@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Bűnbarlang
 {
     internal class MasodikJatek
@@ -13,7 +14,7 @@ namespace Bűnbarlang
 
         public MasodikJatek()
         {
-            jatekosPenz = 40000;
+            jatekosPenz = 4000;
             probalkozasok = 0;
             rnd = new Random();
             slot = new List<string> { "9", "10", "J", "Q", "K", "A", "🍒", "🍋", "🍊", "🍉", "🍇", "777" };
@@ -47,32 +48,47 @@ namespace Bűnbarlang
                         switch (random)
                         {
                             case < 40:
-                                for (int j = 0; j < 48; j++)
+                                for (int j = 0; j < slot.Count; j++)
                                 {
                                     Thread.Sleep(100);
-                                    Console.Write("\r" + slot[j].PadRight(3));
+                                    Console.Write(slot[j]);
+                                    Thread.Sleep(100);
+                                    for (int j2 = 0;j2 < slot[j].Length; j2++)
+                                    {
+                                        Console.Write("\b");
+                                    }
                                 }
-                                Console.Write(slot[11]);
+                                Console.Write(slot[11] + " ");
                                 eredmeny.Add(slot[11]);
                                 break;
                             case < 76:
-                                for (int j = 0; j < 48; j++)
+                                for (int j = 0; j < slot.Count; j++)
                                 {
+                                    Thread.Sleep(250);
+                                    Console.Write(slot[j]);
                                     Thread.Sleep(100);
-                                    Console.Write("\r" + slot[j].PadRight(3));
+                                    for (int j2 = 0; j2 < slot[j].Length; j2++)
+                                    {
+                                        Console.Write("\b");
+                                    }
                                 }
                                 random = rnd.Next(6);
-                                Console.Write(slot[random]);
+                                Console.Write(slot[random] + " ");
                                 eredmeny.Add(slot[random]);
                                 break;
                             default:
-                                for (int j = 0; j < 48; j++)
+                                for (int j = 0; j < slot.Count; j++)
                                 {
+                                    Thread.Sleep(250);
+                                    Console.Write(slot[j]);
                                     Thread.Sleep(100);
-                                    Console.Write("\r" + slot[j].PadRight(3));
+                                    for (int j2 = 0; j2 < slot[j].Length; j2++)
+                                    {
+                                        Console.Write("\b");
+                                    }
                                 }
                                 random = rnd.Next(6, 11);
-                                Console.Write(slot[random]);
+                                Console.Write(slot[random] + " ");
                                 eredmeny.Add(slot[random]);
                                 break;
                         }
@@ -103,13 +119,14 @@ namespace Bűnbarlang
                         Console.WriteLine("Nincs nyeremény.");
                     }
                     Console.WriteLine($"Aktuális pénzösszeg: {jatekosPenz}");
-                    Console.WriteLine("Folytatás/Kilépés (y/n)");
+                    Console.WriteLine("Ha ki szeretnél lépni, nyomd meg az N betűt!");
                     if (Console.ReadKey(true).Key == ConsoleKey.N)
                     {
                         jatszik = false;
                     }
                 }
             }
+            Console.WriteLine($"Aktuális pénzösszeg: {jatekosPenz}");
         }
 
     }
