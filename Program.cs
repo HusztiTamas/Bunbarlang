@@ -28,8 +28,8 @@ class Program
                     jatek.Start();
                     break;
                 case "2":
-                    Console.WriteLine("2es jatek");
-                    Console.ReadKey();
+                    MasodikJatek jatek2 = new MasodikJatek();
+                    jatek2.Start();
                     break;
                 case "3":
                     fut = false;
