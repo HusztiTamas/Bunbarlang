@@ -16,7 +16,7 @@ class Program
             Console.WriteLine("Üdv a Bűnbarlangban!");
             Console.WriteLine("=============================\n");
             Console.WriteLine("1. Első játék (Blackjack)");
-            Console.WriteLine("2. Második játék");
+            Console.WriteLine("2. Második játék (Pénznyelő)");
             Console.WriteLine("3. Kilépés");
             Console.WriteLine("\nVálasztás: ");
 
@@ -45,6 +45,7 @@ class Program
     }
     static void Main()
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         Game();
     }
 }

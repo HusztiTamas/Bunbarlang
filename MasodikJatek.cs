@@ -36,6 +36,7 @@ namespace Bűnbarlang
                 if (jatekosPenz <= 399)
                 {
                     Console.WriteLine("Kifogytál a pénzből!");
+                    Thread.Sleep(10000);
                     jatszik = false;
                 }
                 else
@@ -47,12 +48,12 @@ namespace Bűnbarlang
                         random = rnd.Next(100);
                         switch (random)
                         {
-                            case < 40:
+                            case < 10:
                                 for (int j = 0; j < slot.Count; j++)
                                 {
-                                    Thread.Sleep(100);
+                                    Thread.Sleep(40);
                                     Console.Write(slot[j]);
-                                    Thread.Sleep(100);
+                                    Thread.Sleep(40);
                                     for (int j2 = 0;j2 < slot[j].Length; j2++)
                                     {
                                         Console.Write("\b");
@@ -61,12 +62,12 @@ namespace Bűnbarlang
                                 Console.Write(slot[11] + " ");
                                 eredmeny.Add(slot[11]);
                                 break;
-                            case < 76:
+                            case < 55:
                                 for (int j = 0; j < slot.Count; j++)
                                 {
-                                    Thread.Sleep(250);
+                                    Thread.Sleep(40);
                                     Console.Write(slot[j]);
-                                    Thread.Sleep(100);
+                                    Thread.Sleep(40);
                                     for (int j2 = 0; j2 < slot[j].Length; j2++)
                                     {
                                         Console.Write("\b");
@@ -79,9 +80,9 @@ namespace Bűnbarlang
                             default:
                                 for (int j = 0; j < slot.Count; j++)
                                 {
-                                    Thread.Sleep(250);
+                                    Thread.Sleep(40);
                                     Console.Write(slot[j]);
-                                    Thread.Sleep(100);
+                                    Thread.Sleep(40);
                                     for (int j2 = 0; j2 < slot[j].Length; j2++)
                                     {
                                         Console.Write("\b");
